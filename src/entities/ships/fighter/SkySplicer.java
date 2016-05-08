@@ -27,9 +27,6 @@ public class SkySplicer extends Ship{
 
     protected void initComponents(){
 
-        //TODO REMOVE TEST
-        angle = 0;
-
         BufferedImage image = ArtHelper.getImage("Scc_Sections/Section_19.png");
         splicerBody = new ShipComponent(image, 0, 0);
         splicerBody.setPivot(image.getWidth()/3, image.getHeight()/2);

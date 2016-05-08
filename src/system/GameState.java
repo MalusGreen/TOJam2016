@@ -38,10 +38,15 @@ public class GameState{
     }
 
     public static void draw(Graphics g){
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.scale(1/InputState.zoom, 1/InputState.zoom);
+
         Camera.getCamera().panCamera(g);
         GameState.getPlayer().draw(g);
         GameState.getArena().draw(g);
         Camera.getCamera().unpanCamera(g);
+
+        g2d.scale(InputState.zoom, InputState.zoom);
     }
 
 

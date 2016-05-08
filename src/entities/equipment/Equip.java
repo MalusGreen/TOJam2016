@@ -53,6 +53,10 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
 
     protected boolean ally;
 
+    public int getLevel() {
+        return level;
+    }
+
     protected int level = 1;
 
     public void setXY(double x, double y){
@@ -81,6 +85,7 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
         damage = damage * level/4 + 1;
         cooldown = cooldown / (level/4 + 1);
 
+        this.level = level;
         this.itemInfo = this.getInfoArray();
     }
 

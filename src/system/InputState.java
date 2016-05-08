@@ -14,4 +14,5 @@ public class InputState {
     public static int mouseX;
     public static int mouseY;
     public static Equip currentDragged;
+    public static double zoom = 1;
 }

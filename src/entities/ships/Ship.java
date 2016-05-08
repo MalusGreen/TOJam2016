@@ -10,6 +10,7 @@ import interfaces.Typable;
 import system.MathHelper;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -34,6 +35,16 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
     protected double turnrate;
 
     protected boolean ally;
+
+    public boolean isPlayer() {
+        return player;
+    }
+
+    public void setPlayer(boolean playerFire) {
+        this.player = playerFire;
+    }
+
+    protected boolean player;
 
     public int getLevel() {
         return level;
@@ -139,6 +150,7 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
         EquipSlot e = new EquipSlot(x, y, ally);
         e.setXY(this.location.x, this.location.y);
         equipslots.add(e);
+        compNum ++;
     }
 
     public void setCompenentEquipment(Equip e, int x, int y){
@@ -173,5 +185,16 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
     @Override
     public void drawImage(Graphics g){
         components.forEach(c -> c.draw(g));
+    }
+
+    protected ShipComponent makeComponent(BufferedImage image, int c_x, int c_y){
+        ShipComponent c = new ShipComponent(image, 0 , 0);
+        c.setPivot(c_x, c_y);
+        return c;
+    }
+
+    private int compNum = -1;
+    protected void setEquipment(Equip e){
+        equipslots.get(compNum).setEquip(e);
     }
 }

@@ -17,6 +17,16 @@ public abstract class Projectile extends GameObject implements Actionable, Team 
 
     boolean ally;
 
+    public boolean isPlayerFired() {
+        return playerFired;
+    }
+
+    public void setPlayerFired(boolean playerFired) {
+        this.playerFired = playerFired;
+    }
+
+    boolean playerFired;
+
     public int getDamage() {
         return damage;
     }

@@ -64,7 +64,7 @@ public abstract class ItemPane extends JPanel implements ActionListener{
         transaction.setBounds(100,850,152,25);
         transaction.addActionListener(this);
         this.add(transaction);
-        this.setComponentZOrder(transaction, 0);
+        this.setComponentZOrder(transaction, 1);
     }
 
     private void initSortButtons(){

@@ -45,7 +45,6 @@ public class GameScreen extends JPanel implements Page, MouseListener, MouseMoti
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
         setHints(g);
 
         GameState.draw(g);

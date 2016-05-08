@@ -26,8 +26,8 @@ public class Camera {
     }
 
     public void setTarget(Point.Double location){
-        this.tx = location.x - 500;
-        this.ty = location.y - 500;
+        this.tx = location.x - 500 * InputState.zoom;
+        this.ty = location.y - 500 * InputState.zoom;
 
         double dx = tx - x;
         double dy = ty - y;

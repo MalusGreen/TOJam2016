@@ -3,7 +3,7 @@ package system;
 import entities.equipment.Equip;
 import entities.equipment.fighter.FT_MachineGun;
 import entities.ships.Ship;
-import entities.ships.fighter.SkySplicer;
+import entities.ships.frigate.MissileFrigate;
 import interfaces.Updatable;
 
 import java.awt.*;
@@ -37,7 +37,8 @@ public class Player implements Updatable{
         cash = 0;
         level = 1;
         inventory = new Inventory();
-        this.setShip(new SkySplicer(100, 100));
+        this.setShip(new MissileFrigate(100, 100));
+        this.ship.setPlayer(true);
         GameState.getArena().addShip(ship);
     }
 

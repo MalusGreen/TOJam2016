@@ -3,6 +3,7 @@ package client.buttons;
 import client.pages.ShipScreen;
 import client.panels.HoverPanel;
 import client.panels.ItemPane;
+import driver.Driver;
 import entities.equipment.Equip;
 import graphics.PrettyBtn;
 import interfaces.Page;
@@ -21,19 +22,32 @@ public class ItemBox extends PrettyBtn implements MouseMotionListener{
     Equip e;
     HoverPanel hoverPanel;
 
+    static Color[] colors = new Color[]{
+            Color.orange,
+            Color.green,
+            Color.cyan
+    };
+
     public ItemBox(ItemPane itemPane, Equip equip, ImageIcon hoverImage) {
         super(new ImageIcon(equip.getImage()), hoverImage);
         this.itemPane = itemPane;
         this.e = equip;
         addMouseMotionListener(this);
+        initHoverPanel();
     }
 
     private void initHoverPanel(){
         hoverPanel = new HoverPanel();
-        hoverPanel.setBackground(new Color(0,0,0));
 
-        hoverPanel.addText(e.getName(), Color.cyan);
-        e.getItemInfo();
+        hoverPanel.addText("LEVEL " + e.getLevel(), Color.yellow);
+        hoverPanel.addText(e.getName() + ": ", Color.yellow);
+
+        int count = 0;
+
+        for (String s : e.getItemInfo()) {
+            hoverPanel.addText(s, colors[count]);
+            count ++;
+        }
     }
 
     public ItemBox(ItemPane itemPane, ImageIcon hoverImage) {
@@ -66,6 +80,27 @@ public class ItemBox extends PrettyBtn implements MouseMotionListener{
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e){
+        super.mouseEntered(e);
+        if (this.e == null) {
+            return;
+        }
+        itemPane.add(hoverPanel);
+        hoverPanel.setBounds(this.getX() + 30, this.getY() + 150, 250, 100);
+        itemPane.setComponentZOrder(hoverPanel, 0);
+        Driver.getMainFrame().validate();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e){
+        super.mouseExited(e);
+        if (this.e == null) {
+            return;
+        }
+        itemPane.remove(hoverPanel);
     }
 
     @Override

@@ -58,7 +58,6 @@ public class EquipSlot implements Actionable, Updatable, Drawable{
     }
 
     public void setEquip(Equip e){
-        System.out.println("Equipped!!!");
         this.equip.setEquipped(false);
         this.equip = e;
         this.equip.setEquipped(true);
