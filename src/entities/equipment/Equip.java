@@ -21,6 +21,16 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
     protected int volley;
     protected String type;
 
+    public String[] getItemInfo() {
+        return itemInfo;
+    }
+
+    public void setItemInfo(String[] itemInfo) {
+        this.itemInfo = itemInfo;
+    }
+
+    protected String[] itemInfo;
+
     public BufferedImage getImage() {
         return image;
     }
@@ -70,6 +80,8 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
     public void randomizestats(int level){
         damage = damage * level/4 + 1;
         cooldown = cooldown / (level/4 + 1);
+
+        this.itemInfo = this.getInfoArray();
     }
 
     public void timerTick(){
@@ -94,4 +106,17 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
     public String getType(){
         return type;
     }
+
+    protected void initInfo(String name, String[] description){
+        this.name = name;
+        this.itemInfo = description;
+    }
+    protected String[] getInfoArray(){
+        return new String[]{
+                "Damage: " + damage,
+                "Cooldown: " + cooldown,
+                "volley: " + volley
+        };
+    }
+
 }

@@ -16,6 +16,7 @@ public class FT_MachineGun extends Equip {
         cooldown = 60;
         type = "Fighter";
         this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon4.png"));
+        initInfo("FT_MachineGun", this.getInfoArray());
     }
 
     @Override

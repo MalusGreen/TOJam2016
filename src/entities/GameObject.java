@@ -14,6 +14,14 @@ public abstract class GameObject implements Updatable, Drawable {
     protected Point.Double velocity;
     protected double angle;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     protected String name;
     protected String description;
 

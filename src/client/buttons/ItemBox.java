@@ -1,6 +1,7 @@
 package client.buttons;
 
 import client.pages.ShipScreen;
+import client.panels.HoverPanel;
 import client.panels.ItemPane;
 import entities.equipment.Equip;
 import graphics.PrettyBtn;
@@ -18,11 +19,21 @@ import java.awt.event.MouseMotionListener;
 public class ItemBox extends PrettyBtn implements MouseMotionListener{
     ItemPane itemPane;
     Equip e;
+    HoverPanel hoverPanel;
+
     public ItemBox(ItemPane itemPane, Equip equip, ImageIcon hoverImage) {
         super(new ImageIcon(equip.getImage()), hoverImage);
         this.itemPane = itemPane;
         this.e = equip;
         addMouseMotionListener(this);
+    }
+
+    private void initHoverPanel(){
+        hoverPanel = new HoverPanel();
+        hoverPanel.setBackground(new Color(0,0,0));
+
+        hoverPanel.addText(e.getName(), Color.cyan);
+        e.getItemInfo();
     }
 
     public ItemBox(ItemPane itemPane, ImageIcon hoverImage) {

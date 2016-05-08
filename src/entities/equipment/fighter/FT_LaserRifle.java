@@ -16,6 +16,7 @@ public class FT_LaserRifle extends Equip{
         cooldown = 60;
         type = "Fighter";
         this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon5.png"));
+        initInfo("FT_LaserRifle", this.getInfoArray());
     }
 
     @Override

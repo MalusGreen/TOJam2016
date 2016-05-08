@@ -1,8 +1,7 @@
 package system;
 
-import javafx.scene.shape.Ellipse;
-
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -46,9 +45,8 @@ public class MathHelper {
         );
     }
 
-    public static Ellipse rotate(double angle, Ellipse shape){
-        shape.setRotate(angle);
-
+    public static Shape rotate(double angle, Shape shape){
+        shape = AffineTransform.getRotateInstance(angle).createTransformedShape(shape);
         return shape;
     }
 

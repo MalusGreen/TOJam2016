@@ -4,7 +4,7 @@ import interfaces.Drawable;
 import system.MathHelper;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -77,7 +77,9 @@ public class ShipComponent implements Drawable {
 
     private double circleSize = 0.8;
 
-    public Ellipse2D getEllipse(){
-        return MathHelper.getEllipse(this.getX(), this.getY(), image.getWidth() * circleSize, image.getHeight() * circleSize);
+    public Shape getEllipse(){
+        return AffineTransform.getTranslateInstance(this.getX(), this.getY()).createTransformedShape(
+                MathHelper.rotate(angle, MathHelper.getEllipse(0, 0, image.getWidth() * circleSize, image.getHeight() * circleSize))
+        );
     }
 }
