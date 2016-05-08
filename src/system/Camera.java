@@ -39,4 +39,7 @@ public class Camera {
     public void panCamera(Graphics g){
         g.translate((int)-x,(int) -y);
     }
+    public void unpanCamera(Graphics g){
+        g.translate((int)x,(int) y);
+    }
 }

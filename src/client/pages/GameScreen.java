@@ -1,5 +1,6 @@
 package client.pages;
 
+import client.panels.MiniMap;
 import interfaces.Page;
 import system.GameState;
 import system.InputState;
@@ -18,9 +19,22 @@ public class GameScreen extends JPanel implements Page, MouseListener, MouseMoti
     }
 
     private void init(){
+        initListeners();
+        initMiniMap();
+    }
+
+    private void initListeners(){
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
+    }
+
+    private void initMiniMap(){
+        this.setLayout(null);
+
+        JPanel minimap = new MiniMap();
+        minimap.setBounds(800, 800, 128, 128);
+        this.add(minimap);
     }
 
     @Override

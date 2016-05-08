@@ -41,6 +41,7 @@ public class GameState{
         Camera.getCamera().panCamera(g);
         GameState.getPlayer().draw(g);
         GameState.getArena().draw(g);
+        Camera.getCamera().unpanCamera(g);
     }
 
 
