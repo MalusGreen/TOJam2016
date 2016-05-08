@@ -87,4 +87,8 @@ public abstract class GameObject implements Updatable, Drawable {
     public Point.Double getLocation(){
         return location;
     }
+
+    public void setLocation(Point.Double point){
+        this.location = point;
+    }
 }

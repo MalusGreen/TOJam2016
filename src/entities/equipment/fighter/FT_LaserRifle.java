@@ -2,6 +2,7 @@ package entities.equipment.fighter;
 
 import entities.equipment.Equip;
 import entities.projectiles.Laser;
+import system.ArtHelper;
 import system.GameState;
 
 /**
@@ -13,6 +14,8 @@ public class FT_LaserRifle extends Equip{
         damage = 2;
         volley = 12;
         cooldown = 60;
+        type = "Fighter";
+        this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon5.png"));
     }
 
     @Override

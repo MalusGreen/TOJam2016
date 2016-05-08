@@ -1,5 +1,7 @@
 package system;
 
+import entities.equipment.Equip;
+import entities.equipment.fighter.FT_MachineGun;
 import entities.ships.Ship;
 import entities.ships.fighter.SkySplicer;
 import interfaces.Updatable;
@@ -11,6 +13,8 @@ import java.awt.*;
  */
 public class Player implements Updatable{
     Ship ship;
+
+    Inventory inventory;
 
     int level;
 
@@ -25,17 +29,32 @@ public class Player implements Updatable{
     int cash;
 
     public Player(){
+        initPlayer();
+        initItems();
+    }
+
+    private void initPlayer(){
         cash = 0;
         level = 1;
+        inventory = new Inventory();
         this.setShip(new SkySplicer(100, 100));
         GameState.getArena().addShip(ship);
+    }
+
+    private void initItems(){
+        addItemofLevel(new FT_MachineGun(), 2);
+        addItemofLevel(new FT_MachineGun(), 2);
+    }
+
+    private void addItemofLevel(Equip e, int level){
+        e.randomizestats(level);
+        this.inventory.addEquip(e);
     }
 
     public void setShip(Ship ship){
         this.ship = ship;
         ship.setAlly(true);
     }
-
 
     public Ship getShip(){
         return ship;
@@ -60,6 +79,12 @@ public class Player implements Updatable{
 
     public void draw(Graphics g){
         ship.draw(g);
+    }
+
+
+
+    public Inventory getInventory(){
+        return inventory;
     }
 
 }

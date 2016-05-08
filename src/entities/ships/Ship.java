@@ -6,6 +6,7 @@ import entities.equipment.Equip;
 import interfaces.Actionable;
 import interfaces.Collidable;
 import interfaces.Team;
+import interfaces.Typable;
 import system.MathHelper;
 
 import java.awt.*;
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by Kevin Zheng on 2016-05-06.
  */
-public abstract class Ship extends GameObject implements Collidable, Team, Actionable{
+public abstract class Ship extends GameObject implements Typable, Collidable, Team, Actionable{
+
     protected String type;
 
     public Ship getTarget() {

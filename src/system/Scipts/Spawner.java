@@ -22,8 +22,8 @@ public class Spawner implements Actionable {
 
     private void spawnFighters(){
         for(int i = 0; i < 2; i++){
-            Ship ship = new Drone((int)(Math.random()*10000 - 500 + playerShip.getLocation().x),
-                                  (int)(Math.random()*10000 - 500 + playerShip.getLocation().y));
+            Ship ship = new Drone((int)(Math.random()*1000 - 500 + playerShip.getLocation().x),
+                                  (int)(Math.random()*1000 - 500 + playerShip.getLocation().y));
 
             new DroneAI(ship);
 

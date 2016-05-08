@@ -2,6 +2,7 @@ package entities.equipment.fighter;
 
 import entities.equipment.Equip;
 import entities.projectiles.Bullet;
+import system.ArtHelper;
 import system.GameState;
 
 /**
@@ -13,6 +14,8 @@ public class FT_MachineGun extends Equip {
         damage = 1;
         volley = 6;
         cooldown = 60;
+        type = "Fighter";
+        this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon4.png"));
     }
 
     @Override

@@ -1,11 +1,17 @@
 package client.panels;
 
+import client.buttons.ItemBox;
+import entities.equipment.Equip;
 import graphics.PrettyBtn;
+import system.ArtHelper;
+import system.InputState;
+import system.Inventory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by Kevin Zheng on 2016-05-06.
@@ -13,6 +19,9 @@ import java.awt.event.ActionListener;
 public abstract class ItemPane extends JPanel implements ActionListener{
     private String typeShown;
     private JButton transaction;
+    private JPanel itemPanel;
+    private Inventory items;
+    private Inventory other;
 
     private String[] paneTitles = new String[]{
             "Fighter",
@@ -23,14 +32,17 @@ public abstract class ItemPane extends JPanel implements ActionListener{
             "Capital"
     };
 
-    public ItemPane(){
-        init();
-    }
-
-    public void init(){
+    public ItemPane(Inventory items, Inventory other, String btnName){
+        init(items, other);
         initVar();
         initPane();
-        initButtons();
+        initItemPanel();
+        initButtons(btnName);
+    }
+
+    public void init(Inventory items, Inventory other) {
+        this.items = items;
+        this.other = other;
     }
 
     private void initVar(){
@@ -42,13 +54,13 @@ public abstract class ItemPane extends JPanel implements ActionListener{
         this.setBackground(new Color(0,0,0,0));
     }
 
-    private void initButtons(){
+    private void initButtons(String btnName){
         initSortButtons();
-        initTransactionButton();
+        initTransactionButton(btnName);
     }
 
-    private void initTransactionButton(){
-        transaction = new PrettyBtn("Transaction", 1, Color.lightGray);
+    private void initTransactionButton(String btnName){
+        transaction = new PrettyBtn(btnName, 1, Color.lightGray);
         transaction.setBounds(100,850,152,25);
         transaction.addActionListener(this);
         this.add(transaction);
@@ -87,8 +99,60 @@ public abstract class ItemPane extends JPanel implements ActionListener{
         buttonPanel.add(button, c);
     }
 
+    private void initItemPanel(){
+        itemPanel = new JPanel();
+        itemPanel.setBackground(new Color(0,0,0,0));
+        itemPanel.setLayout(null);
+        itemPanel.setBounds(0, 100, 400, 720);
+
+        this.setItems();
+        this.add(itemPanel);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
+        if(e.getSource() instanceof JButton){
+            JButton b = (JButton) e.getSource();
+            if(b.getText().equals("BUY")||b.getText().equals("SELL")){
+
+            }
+            else if(!typeShown.equals(b.getText())){
+                typeShown = b.getText();
+                this.setItems();
+            }
+        }
+    }
+
+    public void setItems(){
+        ArrayList<Equip> items = this.items.getListofType(typeShown);
+        itemPanel.removeAll();
+        ItemBox button;
+        for(int i = 0 ; i < 16*10; i++){
+            ImageIcon hoverImage = new ImageIcon(ArtHelper.getEmptyImage(40,40));
+
+            if(i < items.size()){
+                button = new ItemBox(this, items.get(i), hoverImage);
+            }
+            else{
+                button = new ItemBox(this, hoverImage);
+            }
+            int x = (i%10)*40;
+            int y = (i/10)*40;
+            button.setBounds(x, y, 40, 40);
+            itemPanel.add(button);
+        }
+    }
+
+    public void dropIn(){
+        if(this.getBounds().contains(InputState.mouseX, InputState.mouseY)){
+
+            if(items.getListofType("All").contains(InputState.currentDragged)){
+                return;
+            }
+            Equip e = InputState.currentDragged;
+            other.removeEquip(e);
+            items.addEquip(e);
+        }
     }
 
     abstract void transaction();

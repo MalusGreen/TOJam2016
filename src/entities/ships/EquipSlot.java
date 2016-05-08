@@ -58,7 +58,10 @@ public class EquipSlot implements Actionable, Updatable, Drawable{
     }
 
     public void setEquip(Equip e){
+        System.out.println("Equipped!!!");
+        this.equip.setEquipped(false);
         this.equip = e;
+        this.equip.setEquipped(true);
         this.equip.setXY(this.getX(), this.getY());
     }
 
@@ -76,7 +79,7 @@ public class EquipSlot implements Actionable, Updatable, Drawable{
     }
 
     public Rectangle getRect(){
-        return new Rectangle((int)(x - 12), (int)(y - 12), 24, 24);
+        return new Rectangle((int)(this.getX() - 12), (int)(this.getY() - 12), 24, 24);
     }
 
     @Override

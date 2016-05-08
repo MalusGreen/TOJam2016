@@ -20,6 +20,6 @@ public class Damage extends Effect{
 
     @Override
     public void drawImage(Graphics g) {
-        g.drawString(String.valueOf(damage), (int)(Math.random() * 3) , (int)(Math.random() * 3));
+        g.drawString(String.valueOf(damage), (int)(Math.random() * 2) , (int)(Math.random() * 2 + (360 - health)/10));
     }
 }

@@ -17,4 +17,13 @@ public class ArtHelper {
             return new BufferedImage(25, 25, BufferedImage.TYPE_3BYTE_BGR);
         }
     }
+
+
+
+    public static BufferedImage getEmptyImage(int width, int height){
+        return new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+    }
+    public static BufferedImage getBlankImage(int width, int height){
+        return new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+    }
 }

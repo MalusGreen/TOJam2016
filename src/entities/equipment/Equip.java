@@ -3,13 +3,15 @@ package entities.equipment;
 import entities.GameObject;
 import interfaces.Actionable;
 import interfaces.Team;
+import interfaces.Typable;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Kevin Zheng on 2016-05-06.
  */
-public abstract class Equip extends GameObject implements Actionable, Team{
+public abstract class Equip extends GameObject implements Typable, Actionable, Team{
 
     boolean equipped;
 
@@ -17,6 +19,17 @@ public abstract class Equip extends GameObject implements Actionable, Team{
     protected double cooldown;
     protected int timer = -1;
     protected int volley;
+    protected String type;
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    protected BufferedImage image;
 
     @Override
     public boolean isAlly() {
@@ -78,4 +91,7 @@ public abstract class Equip extends GameObject implements Actionable, Team{
         }
     }
 
+    public String getType(){
+        return type;
+    }
 }

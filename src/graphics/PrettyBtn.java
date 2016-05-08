@@ -49,12 +49,15 @@ public class PrettyBtn extends JButton implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+
 	}
 
 	public void mousePressed(MouseEvent e) {
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -76,6 +79,10 @@ public class PrettyBtn extends JButton implements MouseListener {
 
 	@Override
 	public void setBackground(Color c){
+		if(c == null){
+			super.setBackground(null);
+			return;
+		}
 		super.setBackground(c.darker());
 	}
 }
