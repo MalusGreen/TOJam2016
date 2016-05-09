@@ -70,6 +70,7 @@ public class DriverFrame extends JFrame implements ActionListener{
         cardLayout.show(this.getContentPane(), name);
         this.currentPage = Page.pages.get(name);
         ((JPanel)currentPage).requestFocus();
+        currentPage.toPage();
     }
 
     @Override

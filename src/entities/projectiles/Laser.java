@@ -26,7 +26,7 @@ public class Laser extends Projectile{
 
     @Override
     protected void init(int x, int y, int damage, double angle, boolean ally) {
-        speed = 30;
+        speed = 20;
         size = 5;
         super.init(x, y, damage, angle, ally);
     }

@@ -1,5 +1,6 @@
 package client.pages;
 
+import client.buttons.TransitionButton;
 import graphics.PrettyBtn;
 import interfaces.Page;
 import client.panels.InventoryPane;
@@ -58,6 +59,10 @@ public class ShipScreen extends JPanel implements Page, ActionListener{
         shopButton.addActionListener(this);
 
         this.add(shopButton);
+
+        TransitionButton backButton = new TransitionButton("<", "Main Menu", 2);
+        backButton.setBounds(50, 10, 50, 50);
+        this.add(backButton);
     }
 
     @Override
@@ -104,5 +109,11 @@ public class ShipScreen extends JPanel implements Page, ActionListener{
 
         shopPane.setItems();
         inventoryPane.setItems();
+    }
+
+    @Override
+    public void toPage() {
+        this.shopPane.setItems();
+        this.inventoryPane.setItems();
     }
 }

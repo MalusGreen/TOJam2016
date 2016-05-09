@@ -12,6 +12,11 @@ import java.awt.*;
 public abstract class GameObject implements Updatable, Drawable {
     protected Point.Double location;
     protected Point.Double velocity;
+
+    public double getAngle() {
+        return angle;
+    }
+
     protected double angle;
 
     public String getName() {
@@ -53,9 +58,12 @@ public abstract class GameObject implements Updatable, Drawable {
         initVelocity(0, 0);
     }
 
+    protected int MAXHEALTH;
+
     protected void initInfo(String name, int health, String description){
         this.name = name;
         this.description = description;
+        this.MAXHEALTH = health;
         this.health = health;
     }
 

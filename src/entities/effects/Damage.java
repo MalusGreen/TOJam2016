@@ -10,6 +10,7 @@ public class Damage extends Effect{
     public Damage(int x, int y, int damage) {
         initLocation(x, y);
         health = 360;
+        MAXHEALTH = 360;
         this.damage = damage;
     }
 

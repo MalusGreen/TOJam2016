@@ -9,6 +9,7 @@ public class Trail extends Effect{
     public Trail(int x, int y){
         initLocation(x, y);
         health = 120;
+        MAXHEALTH = 120;
     }
 
     @Override

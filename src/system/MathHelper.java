@@ -1,8 +1,11 @@
 package system;
 
+import entities.ships.Ship;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 /**
  * Created by Kevin Zheng on 2016-05-06.
@@ -101,5 +104,31 @@ public class MathHelper {
         return Math.atan2(dy, dx);
     }
 
+    public static Ship getTarget(boolean ally, Point.Double location, int range){
+        ArrayList<Ship> ships = ally ? GameState.getArena().getEnemies() : GameState.getArena().getAllies();
 
+        for(Ship ship: ships){
+            if(MathHelper.inRange(location, ship.getLocation(), range)){
+                return ship;
+            }
+        }
+
+        return null;
+    }
+
+    public static int shortSide(Ship ship, Ship other){
+        double angle = ship.getAngle();
+
+        double targetAngle = getAngle(ship.getLocation(), other.getLocation());
+
+        angle += (Math.PI * 2);
+        angle = angle % (Math.PI * 2);
+
+        targetAngle += (Math.PI * 2);
+        targetAngle = targetAngle % (Math.PI * 2);
+
+
+
+        return -1;
+    }
 }

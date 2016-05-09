@@ -11,9 +11,9 @@ import system.GameState;
 public class FT_MachineGun extends Equip {
 
     public FT_MachineGun(){
-        damage = 1;
-        volley = 6;
-        cooldown = 60;
+        damage = 4;
+        volley = 1;
+        cooldown = 20;
         type = "Fighter";
         this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon4.png"));
         initInfo("FT_MachineGun", this.getInfoArray());

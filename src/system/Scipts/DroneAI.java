@@ -24,6 +24,7 @@ public class DroneAI extends ShipAI{
         else{
             list = GameState.getArena().getAllies();
         }
+
         if(ship.getTarget() == null){
             for(Ship s: list){
                 if(MathHelper.inRange(ship.getLocation(), s.getLocation(), 500)){
@@ -33,6 +34,9 @@ public class DroneAI extends ShipAI{
             }
         }
         else if(!MathHelper.inRange(ship.getLocation(), ship.getTarget().getLocation(), 500)){
+            ship.setTarget(null);
+        }
+        else if(!ship.getTarget().isAlive()){
             ship.setTarget(null);
         }
     }

@@ -35,6 +35,7 @@ public abstract class Projectile extends GameObject implements Actionable, Team 
 
     public Projectile(){
         health = 100;
+        MAXHEALTH = 100;
     }
 
     public void update(){

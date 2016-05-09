@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class Drone extends Ship {
     public Drone(int x, int y){
         initLocation(x, y);
-        initInfo("Drone", 50, "An unmanned scout. Easy pickings for the likes of you.");
+        initInfo("Drone", 25, "An unmanned scout. Easy pickings for the likes of you.");
         initComponents();
     }
 
@@ -29,7 +29,7 @@ public class Drone extends Ship {
         BufferedImage image = ArtHelper.getImage("Scc_Sections/Core_6.png");
         droneBody = new ShipComponent(image, 0, 0);
         droneBody.setPivot(image.getWidth()/2, image.getHeight()/2);
-        addComponentSlot(0 , 0);
+        addEquipSlot(0 , 0);
         this.equipslots.get(0).setEquip(new FT_MachineGun());
 
         components.add(droneBody);

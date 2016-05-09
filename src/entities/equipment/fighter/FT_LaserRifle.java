@@ -12,8 +12,8 @@ public class FT_LaserRifle extends Equip{
 
     public FT_LaserRifle() {
         damage = 2;
-        volley = 12;
-        cooldown = 60;
+        volley = 2;
+        cooldown = 20;
         type = "Fighter";
         this.setImage(ArtHelper.getImage("Scc_Sections/Scc_Weapon5.png"));
         initInfo("FT_LaserRifle", this.getInfoArray());

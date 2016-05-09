@@ -131,4 +131,9 @@ public class GameScreen extends JPanel implements Page, MouseListener, MouseMoti
     public void mouseMoved(MouseEvent e) {
 
     }
+
+    @Override
+    public void toPage() {
+        GameState.getArena().reset();
+    }
 }

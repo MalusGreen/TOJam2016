@@ -7,4 +7,6 @@ import java.util.HashMap;
  */
 public interface Page extends Updatable{
     HashMap<String, Page> pages = new HashMap<String, Page>();
+
+    void toPage();
 }

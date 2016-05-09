@@ -30,7 +30,7 @@ public class Bullet extends Projectile{
 
     @Override
     protected void init(int x, int y, int damage, double angle, boolean ally) {
-        speed = 20;
+        speed = 15;
         size = 2;
         super.init(x, y, damage, angle, ally);
     }

@@ -1,5 +1,7 @@
 package system;
 
+import driver.Driver;
+
 import java.awt.*;
 
 /**
@@ -47,6 +49,10 @@ public class GameState{
         Camera.getCamera().unpanCamera(g);
 
         g2d.scale(InputState.zoom, InputState.zoom);
+
+        if(!GameState.getPlayer().getShip().isAlive()){
+            Driver.getMainFrame().changePage("Ship Screen");
+        }
     }
 
 

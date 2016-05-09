@@ -16,8 +16,7 @@ public class SkySplicer extends Ship{
     public SkySplicer(int x, int y) {
         initLocation(x, y);
         initComponents();
-        initShipTypeAccel();
-        initInfo("SkySplicer", 100, "A standard issue D-Class Fighter. For its versatility in combat it remains a staple of space warfare to this day.");
+        initInfo("SkySplicer", 50, "A standard issue D-Class Fighter. For its versatility in combat it remains a staple of space warfare to this day.");
     }
 
     @Override
@@ -30,8 +29,8 @@ public class SkySplicer extends Ship{
         BufferedImage image = ArtHelper.getImage("Scc_Sections/Section_19.png");
         splicerBody = new ShipComponent(image, 0, 0);
         splicerBody.setPivot(image.getWidth()/3, image.getHeight()/2);
-        this.addComponentSlot(0, image.getHeight()/4);
-        this.addComponentSlot(0, -image.getHeight()/4);
+        this.addEquipSlot(0, image.getHeight()/4);
+        this.addEquipSlot(0, -image.getHeight()/4);
         this.equipslots.get(0).setEquip(new FT_LaserRifle());
         this.equipslots.get(1).setEquip(new FT_LaserRifle());
 

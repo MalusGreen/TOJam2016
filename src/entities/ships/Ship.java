@@ -7,6 +7,7 @@ import interfaces.Actionable;
 import interfaces.Collidable;
 import interfaces.Team;
 import interfaces.Typable;
+import system.GameState;
 import system.MathHelper;
 
 import java.awt.*;
@@ -26,6 +27,16 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
 
     public void setTarget(Ship target) {
         this.target = target;
+
+        equipslots.forEach(e -> e.getEquip().setTarget(target));
+    }
+
+    public ArrayList<EquipSlot> getEquipslots() {
+        return equipslots;
+    }
+
+    public void setEquipslots(ArrayList<EquipSlot> equipslots) {
+        this.equipslots = equipslots;
     }
 
     protected Ship target;
@@ -64,6 +75,8 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
     public Ship(){
         components = new ArrayList<>();
         equipslots = new ArrayList<>();
+
+        initShipTypeAccel();
     }
 
     public String getType(){
@@ -119,15 +132,14 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
 
     public void draw(Graphics g){
         super.draw(g);
-
+        g.setColor(Color.yellow);
         if(Driver.DEBUG){
-            g.setColor(Color.yellow);
             for (ShipComponent component : components) {
                 ((Graphics2D)g).draw(component.getEllipse());
             }
-            for(EquipSlot equip: equipslots){
-                equip.drawImage(g);
-            }
+        }
+        for(EquipSlot equip: equipslots){
+            equip.drawImage(g);
         }
     }
 
@@ -146,7 +158,7 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
         equipslots.forEach(EquipSlot::act);
     }
 
-    public void addComponentSlot(int x, int y){
+    public void addEquipSlot(int x, int y){
         EquipSlot e = new EquipSlot(x, y, ally);
         e.setXY(this.location.x, this.location.y);
         equipslots.add(e);
@@ -182,9 +194,23 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
         turnrate = 0.01;
     }
 
+    protected void corvette(){
+        type = "Corvette";
+        mass = 8;
+        turnrate = 0.02;
+    }
+
+    protected void destroyer(){
+        type = "Destroyer";
+        mass = 16;
+        turnrate = 0.005;
+    }
+
     @Override
     public void drawImage(Graphics g){
         components.forEach(c -> c.draw(g));
+        g.setColor(Color.green);
+        g.drawLine(-75, -100, (int)(-75 + 150.0 * health / MAXHEALTH ), -100);
     }
 
     protected ShipComponent makeComponent(BufferedImage image, int c_x, int c_y){
@@ -196,5 +222,15 @@ public abstract class Ship extends GameObject implements Typable, Collidable, Te
     private int compNum = -1;
     protected void setEquipment(Equip e){
         equipslots.get(compNum).setEquip(e);
+    }
+
+    public void revive(){
+        this.health = MAXHEALTH;
+        this.alive = true;
+        this.target = null;
+        for(EquipSlot equipSlot: equipslots){
+            equipSlot.getEquip().setTarget(null);
+        }
+        GameState.getArena().addShip(this);
     }
 }

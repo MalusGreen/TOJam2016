@@ -63,4 +63,9 @@ public class MainMenu extends JPanel implements Page, ActionListener{
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    @Override
+    public void toPage() {
+
+    }
 }

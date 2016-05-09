@@ -3,6 +3,7 @@ package system;
 import entities.GameObject;
 import entities.effects.Damage;
 import entities.effects.Effect;
+import entities.equipment.Equip;
 import entities.projectiles.Projectile;
 import entities.ships.Ship;
 import interfaces.Updatable;
@@ -97,6 +98,7 @@ public class Arena implements Updatable {
         ShipAI.shipDecisions();
         updateObjects();
         updateCollision();
+        spawnWeapons();
         remove();
         checkRemove();
     }
@@ -156,6 +158,26 @@ public class Arena implements Updatable {
         checkRemoveObjects(effects);
     }
 
+    private void spawnWeapons(){
+        enemies.forEach( e -> {
+            if(!e.isAlive()){
+                e.getEquipslots().forEach( slot -> {
+                    try {
+                        if(true) {
+
+                            Equip weapon = slot.getEquip().getClass().newInstance();
+                            weapon.randomizestats(MathHelper.generateLevel(GameState.getPlayer().getLevel()));
+                            GameState.getShop().getInventory().addEquip(weapon);
+                        }
+                    } catch (InstantiationException | IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                });
+            }
+
+        });
+    }
+
     private void checkRemoveObjects(ArrayList list){
         list.forEach(obj -> {
             GameObject o = (GameObject)obj;
@@ -196,5 +218,14 @@ public class Arena implements Updatable {
 
     public void draw(Graphics g){
         allObjects.forEach(object -> object.draw(g));
+    }
+
+    public ArrayList<Ship> getTargets(boolean ally){
+        return ally ? enemies : allies;
+    }
+
+    public void reset(){
+        init();
+        GameState.getPlayer().getShip().revive();
     }
 }

@@ -1,9 +1,11 @@
 package entities.equipment;
 
 import entities.GameObject;
+import entities.ships.Ship;
 import interfaces.Actionable;
 import interfaces.Team;
 import interfaces.Typable;
+import system.MathHelper;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -20,6 +22,16 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
     protected int timer = -1;
     protected int volley;
     protected String type;
+
+    public Ship getTarget() {
+        return target;
+    }
+
+    public void setTarget(Ship target) {
+        this.target = target;
+    }
+
+    protected Ship target;
 
     public String[] getItemInfo() {
         return itemInfo;
@@ -78,7 +90,10 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
     @Override
     public void drawImage(Graphics g){
         g.setColor(Color.yellow);
-        g.drawRect(0, 0, 2, 2);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.rotate(angle);
+        g.drawRect(-3, -3, 6, 6);
+        g2d.rotate(-angle);
     }
 
     public void randomizestats(int level){
@@ -122,6 +137,22 @@ public abstract class Equip extends GameObject implements Typable, Actionable, T
                 "Cooldown: " + cooldown,
                 "volley: " + volley
         };
+    }
+
+    protected double getTargetAngle(){
+        double angle;
+        if(target != null){
+            if(!target.isAlive()){
+                target = null;
+                return this.getTargetAngle();
+            }
+            angle = MathHelper.getAngle(this.location, target.getLocation());
+        }
+        else{
+            this.target = MathHelper.getTarget(ally, this.location, 500);
+            angle = this.angle;
+        }
+        return angle;
     }
 
 }
